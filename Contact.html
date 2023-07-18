@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="Style/style.css">
+    <title>SSContact</title>
+</head>
+<body>
+    <header> <div id="main-header">
+        <nav>
+            <div class="buttonsC">
+                <div id="buttons">
+                  <a href="index.html">
+                  <button>Home</button>
+                  </a>
+                </div>
+                <div id="buttons">
+                  <a href="Contact.html">
+                  <button>Contact Us</button>
+                  </a>
+                </div>
+                <div id="buttons">
+                  <a href="Projects.html">
+                  <button>Projects</button>
+                  </a>
+                </div>
+              </div>
+        </nav>
+        <h1>Welcome to our Contact Page !!</h1>
+    <img src="Images/banana.gif" alt="Visual expression of joy after using our service" style="width:100px;height:100px;">
+    </div>
+    </header>
+
+    <main>
+      <div class="MyDetails">
+        <h2>Contact for us is very important, we'll reach you... any way we can</h2>
+        <details open>
+          <summary>Click here to hide our details</summary>
+          <p><b>Name: </b>Aland Azad</p>
+          <p><b>Email: </b>220109420@aston.ac.uk</p>
+          <p><b>Student Number and Candidate Number: </b> 220109420, 306955 respectively </p> 
+        </details>
+      </div>
+    <form>
+      <div class="IdeaSubmission">
+        <h3>Think you have an idea for us? Come and message us</h3>
+        <div id="ContactMethod">
+          <label for="name">Full Name:</label>
+          <input name="Full name" id="fullname" cols="30" rows="1"></input>
+        </br>
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" cols="30" rows="1" ></input>
+        </br>
+        <label for="confirmemail">Confirm Email:</label>
+        <input type="email" name="confirmemail" id="confirmemail" cols="30" rows="1"></input>
+      </br>
+        <label for="SMS">Phone Number</label>
+        <input type="tel" name="SMS" id="SMS" cols="30" rows="1" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"></input>
+          <div id="date">
+          <label for="dates">Date of project proposal</label>
+          <input type="date" id="dates" name="dates" >
+        </div>
+        </div>
+        <div id="submit">
+          <label> Tell us a bit about your project, include as many details as possible:</br> </br>
+            <textarea name="txtAr"rows= "10" cols="80">My project is about </textarea>
+            </label>
+              <input type= "submit" value ="Submit" onclick="submitForm()">
+        </div>
+        </div>
+    </form>
+    </main>
+    <script>
+
+function submitForm() {
+  const name = document.getElementById("fullname").value;
+  const email = document.getElementById("email").value;
+  const confirmEmail = document.getElementById("confirmemail").value;
+  const phone = document.getElementById("SMS").value;
+  const startDate = document.getElementById("dates").value;
+  const message = document.getElementsByName("txtAr")[0].value;
+  
+  // Validate phone number length
+  if (phone.length !== 11) {
+    alert("Phone number must be 11 digits long.");
+    return;
+  }
+  
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.match(emailRegex)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+  
+  // Validate that emails match
+  if (email !== confirmEmail) {
+    alert("Emails do not match.");
+    return;
+  }
+  
+  // Validate description isnt empty
+  if (message.length < 100) {
+    alert("Message must be at least 100 characters long. Try to add more details");
+    return;
+  }
+
+  // Check that start date is at least a day in the future 
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  if (new Date(startDate) < tomorrow) {
+    alert("Start date must be at least 1 day in the future.");
+    return;
+  }
+
+  // Create summary message
+  const summaryMessage = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nStart Date: ${startDate}\nMessage: ${message}`;
+
+  // Show summary message in a pop-up
+  alert("Thanks for submitting, we will get back to you soon! On the next alert is a summary of your information, press OK to continue");
+  alert(summaryMessage);
+
+}
+    </script>
+</body>
+</html>
